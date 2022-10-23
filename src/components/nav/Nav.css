@@ -1,0 +1,9 @@
+.navbar__item {
+    list-style: none;
+    padding: 0.25rem;
+}
+
+.navbar__link {
+    color: blue;
+    font-size: 1.5rem;
+}
