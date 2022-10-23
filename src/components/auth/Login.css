@@ -1,0 +1,33 @@
+.visible {
+    display: block;
+}
+
+.invisible {
+    display: none;
+}
+
+.success, .failure {
+    align-self: center;
+    padding: 4px;
+    border: 1px dashed;
+    opacity: 90%;
+    font-size: 1.75rem;
+    animation: slideDown 2s forwards
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-750%)
+    }
+    100% {
+        transform: translateY(-385%);
+    }
+}
+
+.success {
+    background-color: lightskyblue;
+}
+
+.failure {
+    background-color: lightcoral;
+}
