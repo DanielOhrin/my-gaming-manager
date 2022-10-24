@@ -1,0 +1,26 @@
+#list-form > fieldset {
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: center;
+    margin-bottom: 1rem;
+    width: 50%;
+}
+
+.list {
+    display: flex;  
+    justify-content: space-evenly; 
+    width: 83.333333333%;
+    margin-bottom: 1rem;
+}
+
+.list > div {
+    width: 20%;
+    text-align: center;
+}
+
+.list-headers {
+    background-color: lightgray;
+    text-decoration: underline;
+    font-weight: bold;
+}
+

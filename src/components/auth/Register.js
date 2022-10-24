@@ -15,7 +15,7 @@ export const Register = () => {
 
     useEffect(() => {
         if (result !== "") {
-            setTimeout(() => {setResult("")}, 2000)
+            setTimeout(() => { setResult("") }, 2000)
         }
     }, [result])
 
@@ -78,24 +78,24 @@ export const Register = () => {
                             .then(res => res.json())
                             .then(createdUser => {
                                 if (createdUser.hasOwnProperty("id")) {
-                                    localStorage.setItem("mgm_user", JSON.stringify({ id: createdUser.id }))
-    
+                                    localStorage.setItem("mgm_user", JSON.stringify({ id: createdUser.id, username: createdUser.username }))
+
                                     setResult("Success!")
-    
-                                    setTimeout(() => {navigate("/")}, 2000)
+
+                                    setTimeout(() => { navigate("/") }, 2000)
                                 } else {
                                     setResult("Error creating account!")
-                                    setTimeout(() => {document.getElementById("register-btn").disabled = false}, 2000)
+                                    setTimeout(() => { document.getElementById("register-btn").disabled = false }, 2000)
                                 }
                             })
                     } else {
                         setResult("Email already registered!")
-                        setTimeout(() => {document.getElementById("register-btn").disabled = false}, 2000)
+                        setTimeout(() => { document.getElementById("register-btn").disabled = false }, 2000)
                     }
                 })
         } else {
             setResult("Invalid email address!")
-            setTimeout(() => {document.getElementById("register-btn").disabled = false}, 2000)
+            setTimeout(() => { document.getElementById("register-btn").disabled = false }, 2000)
         }
     }
     // <div className={`${result ? "visible" : "invisible"} ${result === "Success!" ? "success" : "failure"}`}>{result}</div>
@@ -106,19 +106,19 @@ export const Register = () => {
                 <h1 className="w-fit mt-0">Register</h1>
                 <form>
                     <fieldset className="border-none flex flex-col">
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email">Email<strong>*</strong></label>
                         <input name="email" type="text" onChange={handleUserInput} value={userInfo.email} />
                     </fieldset>
                     <fieldset className="border-none flex flex-col">
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor="name">Name<strong>*</strong></label>
                         <input name="name" type="text" onChange={handleUserInput} value={userInfo.name} placeholder="First and Last" />
                     </fieldset>
                     <fieldset className="border-none flex flex-col">
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="username">Username<strong>*</strong></label>
                         <input name="username" type="text" onChange={handleUserInput} value={userInfo.username} />
                     </fieldset>
                     <fieldset className="border-none flex flex-col">
-                        <label htmlFor="phone">Phone (Optional)</label>
+                        <label htmlFor="phone">Phone</label>
                         <input name="phone" type="text" onChange={handleUserInput} value={userInfo.phone} placeholder="000-000-0000" />
                     </fieldset>
                     <div>
