@@ -5,7 +5,7 @@ export const Lists = ({ tags, lists }) => {
         <>
             {
                 lists.map(list => {
-                    return <section id={`list--${list.id}`} className="list">
+                    return <section key={`list--${list.id}`} id={`list--${list.id}`} className="list">
                         <div>
                             <Link to={`/list/${list.id}`}>{list.name}</Link>
                         </div>
