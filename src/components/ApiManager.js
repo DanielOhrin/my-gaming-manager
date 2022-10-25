@@ -1,4 +1,4 @@
-import authHeaders from "./auth/.Auth"
+import { proxy } from "./proxy"
 
 // Personal API (json-server) Fetches
 const baseURL = `http://localhost:8088`
@@ -16,7 +16,7 @@ export const fetchTags = () => {
 }
 
 export const fetchListTags = (params, obj) => {
-    return fetch(`${baseURL}/listTags${params ? params : "/"}`, {...obj})
+    return fetch(`${baseURL}/listTags${params ? params : "/"}`, { ...obj })
 }
 
 export const fetchPlatforms = () => {
@@ -24,18 +24,12 @@ export const fetchPlatforms = () => {
 }
 
 // Public API (IGDB) Fetches
-const igdb = `https://api.igdb.com/v4`
-
-export const fetchGames = (obj) => {
-    return fetch(`${igdb}/games`, obj)
+export const fetchGames = (rules) => {
+    return fetch(`${proxy}/games`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: rules
+    })
 }
-
-fetch(`${igdb}/games`, {
-    method: "POST",
-    headers: {
-        "Accept": "*/*",
-        ...authHeaders
-    },
-    data: "where release_dates.y=2020; fields name,genres.name,cover.url,platforms.name,release_dates.human,summary,themes.slug,total_rating;"
-})
-    .then(res => console.log(res))

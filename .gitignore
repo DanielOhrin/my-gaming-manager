@@ -23,4 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 #Auth Info for IGDB
-/src/components/auth/.Auth.js
+/src/components/proxy.js
