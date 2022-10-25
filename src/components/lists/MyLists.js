@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { fetchLists, fetchTags } from "../ApiManager"
 import { ListForm } from "./ListForm"
-import { Lists, styleLists } from "./Lists"
+import { Lists } from "./Lists"
 import "./MyLists.css"
 
 export const MyLists = () => {
@@ -23,11 +23,6 @@ export const MyLists = () => {
         setUsername(JSON.parse(localStorage.getItem("mgm_user")).username)
     }, [userId])
 
-    useEffect(() => {
-        console.log(lists)
-    }, [lists])
-    // 2 Select elements for tags
-
     return (
         <>
             <ListForm setLists={setLists} userId={userId} />
@@ -43,7 +38,5 @@ export const MyLists = () => {
                 <Lists tags={tags} lists={lists} userId={userId} />
             </article>
         </>
-        //Sections here for each "List"
     )
 }
-// Use a table for this? Either that or some really intricate flex.
