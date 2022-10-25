@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { fetchLists, fetchTags } from "../ApiManager"
 import { ListForm } from "./ListForm"
-import { Lists } from "./Lists"
+import { Lists, styleLists } from "./Lists"
 import "./MyLists.css"
 
 export const MyLists = () => {

@@ -55,9 +55,13 @@ export const ListForm = ({ setLists, userId }) => {
                 //Tag 1
                 copy[0] = parseInt(evt.target.value)
                 setTagIds(copy)
-            } else {
+            } else if (evt.target.id === "tag-2") {
                 //Tag 2
                 copy[1] = parseInt(evt.target.value)
+                setTagIds(copy)
+            } else {
+                //Tag 3
+                copy[2] = parseInt(evt.target.value)
                 setTagIds(copy)
             }
         } else {
@@ -74,6 +78,13 @@ export const ListForm = ({ setLists, userId }) => {
 
         if (Object.values(listInfo).includes("") || Object.values(listInfo).includes(0)) {
             window.alert('Please fill out the required fields.')
+            document.getElementById("saveList-btn").disabled = false
+            return;
+        }
+
+        const duplicateTagCheck = new Set(tagIds)
+        if (duplicateTagCheck.size !== tagIds.length) {
+            window.alert('You may not use the same tag twice.')
             document.getElementById("saveList-btn").disabled = false
             return;
         }
@@ -104,7 +115,7 @@ export const ListForm = ({ setLists, userId }) => {
                             })
                         })
                     }
-                    fetchLists(`?userId=${userId}`)
+                    fetchLists(`?userId=${userId}&_expand=platform&_embed=listTags`)
                         .then(res => res.json())
                         .then(data => setLists(data))
 

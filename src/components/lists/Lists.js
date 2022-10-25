@@ -5,19 +5,19 @@ export const Lists = ({ tags, lists }) => {
         <>
             {
                 lists.map(list => {
-                    return <section className="list">
+                    return <section id={`list--${list.id}`} className="list">
                         <div>
                             <Link to={`/list/${list.id}`}>{list.name}</Link>
                         </div>
                         <div>{new Date(list.dateCreated).toLocaleDateString()}</div>
                         <div>{
-                            list.listTags.length
-                                ? list.listTags.map(listTag => {
-                                    return tags.find(tag => tag.id === listTag.tagId)?.label
-                                }).join(", ")
-                                : "None"
+                            list.listTags?.length
+                            ? list.listTags.map(listTag => {
+                                return tags.find(tag => tag.id === listTag.tagId)?.label
+                            }).join(", ")
+                            : "None"
                         }</div>
-                        <div>{list.platform.label}</div>
+                        <div>{list.platform?.label}</div>
                     </section>
                 })
             }
@@ -26,3 +26,8 @@ export const Lists = ({ tags, lists }) => {
 }
 
 // Style each list a different color (but the same 2 alternating the whole time)
+export const styleLists = () => {
+    const lists = document.getElementsByClassName("list")
+    const listIds = lists?.map(list => list.id)
+    console.log(listIds)
+}

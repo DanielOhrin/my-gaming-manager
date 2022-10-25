@@ -5,7 +5,7 @@ export const Nav = () => {
     const navigate = useNavigate()
 
     return (
-        <ul className=" flex justify-evenly items- bg-yellow-200 m-0 border-solid border-2">
+        <ul className=" flex justify-evenly items- bg-blue-200 m-0 border-solid border-2">
             <li className="navbar__item">
                 <Link className="navbar__link" to="/">Home</Link>
             </li>

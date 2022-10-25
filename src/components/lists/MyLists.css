@@ -19,8 +19,27 @@
 }
 
 .list-headers {
-    background-color: lightgray;
+    background-color: rgb(132, 194, 255);
     text-decoration: underline;
     font-weight: bold;
+    border: solid 2px black !important;
+    border-bottom: 1px solid black !important;
 }
 
+.list-headers, #lists-container > section {
+    margin: 0rem;
+    padding: 1rem 0 1rem 0;
+    border: 1px solid black;
+}
+
+#lists-container > section:nth-child(even) {
+    background-color: lightgray;
+}
+
+#lists-container > section:nth-child(odd) {
+    background-color: rgb(182, 182, 182);
+}
+
+#lists-container {
+    padding-bottom: 5rem;
+}
