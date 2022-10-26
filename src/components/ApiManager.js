@@ -23,6 +23,10 @@ export const fetchPlatforms = () => {
     return fetch(`${baseURL}/platforms`)
 }
 
+export const fetchListGames = (params, obj) => {
+    return fetch(`${baseURL}/listGames${params ? params : "/"}`, { ...obj })
+}
+
 // Public API (IGDB) Fetches
 export const fetchGames = (rules) => {
     return fetch(`${proxy}/games`, {
