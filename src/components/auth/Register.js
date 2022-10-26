@@ -98,7 +98,7 @@ export const Register = () => {
             setTimeout(() => { document.getElementById("register-btn").disabled = false }, 2000)
         }
     }
-    // <div className={`${result ? "visible" : "invisible"} ${result === "Success!" ? "success" : "failure"}`}>{result}</div>
+
     return (
         <article className="h-screen flex justify-center items-center">
             <div className={`mr-40 absolute ${result ? "visible" : "invisible"} ${result === "Success!" ? "success" : "failure"}`}>{result}</div>
