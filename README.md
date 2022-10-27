@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# Introduction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is my front-end capstone for Nashville Software School.
+I developed everything myself apart from boilerplate from installing React.
 
-## Available Scripts
+## What is it?
 
-In the project directory, you can run:
+I wanted to build a project with a public video game api. I decided to make an application where users can create lists of games however they like. Each list can be edited and deleted however the user wants. However, there are a few required fields for making a list and account to ensure uniformity.
 
-### `npm start`
+# Purpose/Motivation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+I enjoy playing video games so I knew I wanted to build something based around them. I threw around a couple of ideas in the weeks leading up to "capstone season" at NSS, and this one seemed most appealing to me, because I can actually use it myself.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# How it works
 
-### `npm test`
+When the user first opens the application, they are redirected to the [login page](https://prnt.sc/a-5fI6UpD1Hi) where they can either login or [register](https://prnt.sc/um0zDvrp7_L5) a new account. Then they are redirected to a view with their lists.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The user can create a list here, then navigate over to the [Search](https://prnt.sc/LePb0A8xCbg9) page _from the navbar_ to search for games to add.
 
-### `npm run build`
+The user's lists are display on the page called [My Lists](https://prnt.sc/opFtVQ8i5vD8), and when the name of a list is clicked on, the user is directed to a view with [the list](https://prnt.sc/x5yzBBrMBz6e) information and all games added to it.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This is the main purpose of the application -- to organize games from all platforms.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# How it was developed
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To reach MVP, I spent four days coding all of the functionality for the components and styling them enough to be useable.
 
-### `npm run eject`
+I used [React](https://reactjs.org/) and [React-Router](https://v5.reactrouter.com/web/guides/quick-start) to manage state and routes in my application.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+For styling, I wanted to try a framework and used [Tailwind](https://tailwindcss.com/).
+For my next project I will probably use BootStrap, because it offers many complex classes that I could have used to make my website look cleaner.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Challenges Conquered
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## IGDB (Public API)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The biggest challenge I conquered was trying to figure out IGDB's API.
 
-## Learn More
+[IGDB](https://api-docs.igdb.com/#about) requires the user to use a POST fetch to GET whatever data they need. Also, they require the user to use a bridge database, or proxy, to avoid CORS.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Figuring out how to setup a database or proxy was very challenging considering I have only dealt with json-servers up to this point, and the instructions on their website were outdated.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+I ended up figuring out what was wrong with their instructions and reporting it to them, so I was able to create a stack on AWS to fetch from.
 
-### Code Splitting
+## Modals
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+My trouble with modals was short-lived, and was a styling issue more than anything.
 
-### Analyzing the Bundle Size
+Whenever my modal popped up, it only covered the screen from its position to the end of the parent container, meaning if my modal was created on the right side of the screen, it would only cover the right side of the screen.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+I was able to fix it by using the **top** and **left** attributes in my CSS file
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# How to run the application yourself
