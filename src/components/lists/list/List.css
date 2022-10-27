@@ -10,3 +10,21 @@
 .remove-btn:hover {
     background-color: darkgray;
 }
+
+.listParent, .listGames-section {
+    height: inherit;
+}
+
+.deleteList-btn {
+    align-self: flex-start;
+    background-color: maroon;
+    box-shadow: 2px 4px;
+    border-radius: 360rem;
+    width: 20rem;
+    height: 10rem;
+    font-size: 2.5rem;
+}
+
+.deleteList-btn:hover {
+    background-color: rgb(167, 39, 39);
+}

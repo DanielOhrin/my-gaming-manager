@@ -11,8 +11,8 @@ export const fetchLists = (params, obj) => {
     return fetch(`${baseURL}/lists${params ? params : "/"}`, { ...obj })
 }
 
-export const fetchTags = () => {
-    return fetch(`${baseURL}/tags`)
+export const fetchTags = (params, obj) => {
+    return fetch(`${baseURL}/tags${params ? params : "/"}`, { ...obj })
 }
 
 export const fetchListTags = (params, obj) => {

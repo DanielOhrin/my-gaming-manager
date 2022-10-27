@@ -13,7 +13,7 @@ export const Search = () => {
         })
 
     useEffect(() => {
-        fetchLists(`?userId=${JSON.parse(localStorage.getItem("mgm_user")).id}`)
+        fetchLists(`?userId=${JSON.parse(localStorage.getItem("mgm_user")).id}&_sort=name&_order=asc`)
             .then(res => res.json())
             .then(data => setLists(data))
     }, [])

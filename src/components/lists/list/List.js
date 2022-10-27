@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { fetchGames, fetchListGames, fetchLists, fetchListTags } from "../../ApiManager"
 import { ListEditForm } from "./ListEditForm"
 import { ListGame } from "./ListGame"
@@ -10,7 +10,8 @@ export const List = () => {
         [gameIds, setGameIds] = useState([]),
         [games, setGames] = useState([]),
         [editing, setEditing] = useState(false),
-        { listId } = useParams()
+        { listId } = useParams(),
+        navigate = useNavigate()
 
     useEffect(() => {
         fetchLists(`/${listId}`)
@@ -31,7 +32,7 @@ export const List = () => {
     useEffect(() => {
         if (!gameIds.length) return;
 
-        fetchGames(`where id = (${gameIds.join(", ")}); fields name,genres.name,cover.url,platforms.name,release_dates.y,summary,themes.slug,total_rating;`)
+        fetchGames(`where id = (${gameIds.join(", ")}); fields name,genres.name,cover.url,platforms.name,release_dates.y,summary,themes.slug,total_rating; limit 50;`)
             .then(res => res.json())
             .then(data => {
                 data.forEach(obj => obj.cover.url = obj.cover.url.split("thumb").join("logo_med"))
@@ -39,6 +40,23 @@ export const List = () => {
             })
 
     }, [gameIds])
+
+    const deleteList = (evt) => {
+        fetchLists(`/${evt.target.id.split("--")[1]}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json:"
+            }
+        })
+            .then(res => {
+                if (res.ok) {
+                    window.alert(`Successfully deleted list!`)
+                    navigate(`/my-lists/${listInfo.userId}`)
+                } else {
+                    window.alert(`Failed to delete list.`)
+                }
+            })
+    }
 
     return (
         <article>
@@ -66,7 +84,7 @@ export const List = () => {
                 </div>
             </section>
             <hr />
-            <section>
+            <section className="listGames-section flex flex-row flex-wrap justify-center">
                 {
                     !editing
                         ? <h2 className="w-full text-center">Games</h2>
@@ -89,6 +107,9 @@ export const List = () => {
                             </div>
                         )
                 }
+                <div className="w-full self-end flex justify-center">
+                    <button className="deleteList-btn" id={`delete--${listInfo.id}`} onClick={deleteList}>Delete List</button>
+                </div>
             </section>
         </article>
     )

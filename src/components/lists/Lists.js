@@ -12,12 +12,14 @@ export const Lists = ({ tags, lists }) => {
                         <div>{new Date(list.dateCreated).toLocaleDateString()}</div>
                         <div>{
                             list.listTags?.length
-                            ? list.listTags.map(listTag => {
-                                return tags.find(tag => tag.id === listTag.tagId)?.label
-                            }).join(", ")
-                            : "None"
+                                ? list.listTags.map(listTag => {
+                                    return tags.find(tag => tag.id === listTag.tagId)?.label
+                                }).join(", ")
+                                : "None"
                         }</div>
-                        <div>{list.platform?.label}</div>
+                        <div className="flex flex-col">
+                            {list.platform?.label} 
+                        </div>
                     </section>
                 })
             }

@@ -13,7 +13,7 @@ export const ListForm = ({ setLists, userId }) => {
         [platforms, setPlatforms] = useState([])
 
     useEffect(() => {
-        fetchTags()
+        fetchTags(`?_sort=label&_order=asc`)
             .then(res => res.json())
             .then(data => setTags(data))
 
