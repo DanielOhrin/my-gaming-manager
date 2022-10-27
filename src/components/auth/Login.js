@@ -23,7 +23,7 @@ export const Login = () => {
 
         document.getElementById("login-btn").disabled = true
 
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
             //If fetch by email returns object with property "id", then log them in. Otherwise, error message.
             fetchUsers(`?email=${email}`)
                 .then(res => res.json())

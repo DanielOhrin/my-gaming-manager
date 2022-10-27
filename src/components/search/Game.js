@@ -1,4 +1,4 @@
-import { fetchListGames, fetchLists } from "../ApiManager"
+import { fetchListGames } from "../ApiManager"
 import "./Game.css"
 
 export const Game = ({ gameObj, lists, setUserChoices, userChoices, setFeedback }) => {
