@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { fetchLists, fetchListTags, fetchPlatforms, fetchTags } from "../ApiManager"
 import "./MyLists.css"
 
@@ -173,15 +173,15 @@ export const ListForm = ({ setLists, userId }) => {
                     </div>
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="platforms">Platform<strong>*</strong></label>
-                    <div name="platforms">
+                    <div>Platform<strong>*</strong></div>
+                    <div id="platforms">
                         {
                             platforms.map(platform => {
                                 return (
-                                    <>
-                                        <input key={`pInput--${platform.id}`} name="platform" value={platform.id} type="radio" onChange={handleUserInput} />
-                                        <label key={`pLabel--${platform.id}`} className="mr-4" htmlFor="platform">{platform.label}</label>
-                                    </>
+                                    <React.Fragment key={`platform--${platform.id}`}>
+                                        <input name="platform" value={platform.id} type="radio" onChange={handleUserInput} />
+                                        <label className="mr-4" htmlFor="platform">{platform.label}</label>
+                                    </React.Fragment>
                                 )
                             })
                         }

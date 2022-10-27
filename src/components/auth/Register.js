@@ -58,7 +58,7 @@ export const Register = () => {
             return
         }
 
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userInfo.email)) {
+        if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(userInfo.email)) {
             // Check for resource with that email already in database
             fetchUsers(`?email=${userInfo.email}`)
                 .then(res => res.json())

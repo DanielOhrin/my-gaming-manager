@@ -10,7 +10,7 @@ export const Nav = () => {
                 <Link className="navbar__link" to="/">Home</Link>
             </li>
             <li className="navbar__item">
-                <Link className="navbar__link" to="/profile">Profile</Link>
+                <Link className="navbar__link" to={`/profile/${JSON.parse(localStorage.getItem("mgm_user")).id}`}>Profile</Link>
             </li>
             <li className="navbar__item">
                 <Link className="navbar__link" to={`/my-lists/${JSON.parse(localStorage.getItem("mgm_user")).id}`}>My Lists</Link>
@@ -21,7 +21,7 @@ export const Nav = () => {
             <li className="navbar__item">
                 <Link className="navbar__link" to="/login" onClick={() => {
                     localStorage.removeItem("mgm_user")
-                    navigate("/", {replace: true})
+                    navigate("/", { replace: true })
                 }}>Logout</Link>
             </li>
         </ul>
