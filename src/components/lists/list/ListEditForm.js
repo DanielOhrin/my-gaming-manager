@@ -78,7 +78,7 @@ export const ListEditForm = ({ setListInfo, listInfo, setEditing }) => {
 
     return (
         <article id="list-form-container" className="flex flex-col items-center">
-            <form id="list-form" className="flex flex-col items-center w-1/2 pb-4">
+            <form id="list-form" className="flex flex-col items-center w-full pb-4">
                 <fieldset>
                     <label htmlFor="name">List Name<strong>*</strong></label>
                     <input type="text" name="name" value={newInfo.name} onChange={handleUserInput} />

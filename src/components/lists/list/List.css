@@ -28,3 +28,7 @@
 .deleteList-btn:hover {
     background-color: rgb(167, 39, 39);
 }
+
+.modal {
+    left: 0;
+}
