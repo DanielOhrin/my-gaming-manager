@@ -31,7 +31,7 @@ export const Login = () => {
                     if (userObj[0] && userObj[0].hasOwnProperty("id")) {
                         setResult("Success!")
                         localStorage.setItem("mgm_user", JSON.stringify({id: userObj[0].id, username: userObj[0].username}))
-                        setTimeout(() => {navigate("/")}, 2000)
+                        setTimeout(() => {navigate(`/my-lists/${userObj[0].id}`)}, 2000)
                     } else {
                         setResult("Email not registered!")
                         setTimeout(() => {document.getElementById("login-btn").disabled = false}, 2000)

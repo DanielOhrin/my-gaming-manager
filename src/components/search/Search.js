@@ -28,10 +28,10 @@ export const Search = () => {
 
     return (
         <article id="search-container" className="flex flex-col">
-            <div className={`absolute ${feedback ? "visible" : "invisible"} ${feedback === "Success!" ? "successFade" : "failureFade"}`}>{feedback}</div>
+            <div className={`fixed ${feedback ? "visible" : "invisible"} ${feedback === "Success!" ? "successFade" : "failureFade"}`}>{feedback}</div>
             <NameSearch setGames={setGames} setFeedback={setFeedback} />
 
-            <section id="games-container">
+            <section className="games-container">
                 {
                     games.length
                         ? games.map(game => {

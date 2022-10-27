@@ -1,9 +1,9 @@
-#games-container {
+.games-container {
     display: flex;
     flex-flow: row wrap;
 }
 
-#games-container > div {
+.games-container > div {
     margin: 2rem 1.80rem;
 }
 
