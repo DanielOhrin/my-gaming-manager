@@ -82,7 +82,7 @@ export const Register = () => {
 
                                     setResult("Success!")
 
-                                    setTimeout(() => { navigate("/") }, 2000)
+                                    setTimeout(() => { navigate(`/my-lists/${createdUser.id}`) }, 2000)
                                 } else {
                                     setResult("Error creating account!")
                                     setTimeout(() => { document.getElementById("register-btn").disabled = false }, 2000)

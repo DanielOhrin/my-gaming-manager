@@ -1,0 +1,12 @@
+.remove-btn {
+    width: 30%;
+    height: 25%;
+    font-size: 1.25rem;
+    background-color: gray;
+    border-radius: 360rem;
+    box-shadow: 2.5px 1.5px;
+}
+
+.remove-btn:hover {
+    background-color: darkgray;
+}
