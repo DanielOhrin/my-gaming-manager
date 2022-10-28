@@ -75,7 +75,7 @@ B) Follow IGDB's [Proxy](https://api-docs.igdb.com/#proxy) Instructions <br>
 
 ## 4. Create file in project directory for the stack link
 
-Create a **proxy** file in the src/ folder of the main project directory (my-gaming-manager) <br>
+Create a **proxy.js** file in the src/ folder of the main project directory (my-gaming-manager) <br>
 Inside the file, paste the following:
 
 ```
