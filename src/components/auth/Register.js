@@ -64,7 +64,7 @@ export const Register = () => {
                 .then(res => res.json())
                 .then(data => {
                     if (!data.length > 0) {
-                        //Implement a fetch to post their information to users, then redirect them to "My Lists" page
+                        // Fetch to post their information to users, then redirect them to "My Lists" page
                         fetchUsers("/", {
                             method: "POST",
                             headers: {

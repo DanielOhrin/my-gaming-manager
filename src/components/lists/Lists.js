@@ -26,10 +26,3 @@ export const Lists = ({ tags, lists }) => {
         </>
     )
 }
-
-// Style each list a different color (but the same 2 alternating the whole time)
-export const styleLists = () => {
-    const lists = document.getElementsByClassName("list")
-    const listIds = lists?.map(list => list.id)
-    console.log(listIds)
-}

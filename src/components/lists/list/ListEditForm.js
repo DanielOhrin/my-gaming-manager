@@ -69,7 +69,7 @@ export const ListEditForm = ({ setListInfo, listInfo, setEditing }) => {
                 } else {
                     window.alert("Failed to create List")
                     document.getElementById("updateList-btn").disabled = false
-                    return; // Stretch Goal: add popup for success similar to loging/register form has
+                    return;
                 }
             })
 

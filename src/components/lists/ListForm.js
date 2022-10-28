@@ -124,7 +124,7 @@ export const ListForm = ({ setLists, userId }) => {
                 } else {
                     window.alert("Failed to create List")
                     document.getElementById("saveList-btn").disabled = false
-                    return; // Stretch Goal: add popup for success similar to loging/register form has
+                    return;
                 }
             })
 
