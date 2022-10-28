@@ -51,3 +51,52 @@ Whenever my modal popped up, it only covered the screen from its position to the
 I was able to fix it by using the **top** and **left** attributes in my CSS file
 
 # How to run the application yourself
+
+## 1. Clone the Repositories
+
+A) Open your terminal of choice, and navigate to the directory you want the project in. <br>
+B) Paste the following in your terminal:
+
+```
+git clone git@github.com:DanielOhrin/my-gaming-manager.git
+git clone git@github.com:DanielOhrin/mgm-api.git
+```
+
+## 3. Sign up For Twitch (API)
+
+You _need_ to do this step to run IGDB's public API for the games:
+<br>
+<br>
+A) Follow IGDB's [Getting Started](https://api-docs.igdb.com/#about) Directions <br>
+
+- Note: **Account Creation** contains the instructions. When you get to step 3, put http://localhost as your oAuth.<br>
+
+B) Follow IGDB's [Proxy](https://api-docs.igdb.com/#proxy) Instructions <br>
+
+## 4. Create file in project directory for the stack link
+
+Create a **proxy** file in the src/ folder of the main project directory (my-gaming-manager) <br>
+Inside the file, paste the following:
+
+```
+export const proxy = "OutputURLLinkHere"
+```
+
+## 5. Installing dependencies
+
+While in the my-gaming-manager directory in your terminal, type `npm install`.
+
+## 7. Run the project
+
+Once npm finishes installing the dependencies, type `npm start` and move on to the next step.
+
+## 6. Start json server
+
+Create a new terminal session (don't close the original one) <br>
+Navigate to the mgm-api directory and type `json-server database.json -p 8088`
+
+## 7. Have fun with the project
+
+If you followed all of the steps up to this point, you are now able to use the project personally whenever you like. <br>
+
+**IMPORTANT:** Do not share your AWS link with anyone, as too many API calls (`4000+/m`) could result in payment requested.
