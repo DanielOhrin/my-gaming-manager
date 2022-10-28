@@ -18,4 +18,3 @@ export const CustomerView = () => {
         </Route>
     </Routes>
 }
-// May Not need outlet (leave for now)
