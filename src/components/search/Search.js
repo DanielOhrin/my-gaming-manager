@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import { fetchGames, fetchLists } from "../ApiManager"
 import { Game } from "./Game"
 import { NameSearch } from "./NameSearch"
+import { PlatformsFilter } from "./PlatformsFilter"
+import { YearsFilter } from "./YearsFilter"
 
 export const Search = () => {
     const [games, setGames] = useState([]),
@@ -13,7 +15,19 @@ export const Search = () => {
             listId: 0
         }),
         [offset, setOffset] = useState(0),
-        [name, setName] = useState("")
+        [name, setName] = useState(""),
+        [year, setYear] = useState(0),
+        [platformId, setPlatformId] = useState(0)
+
+    const calculateUnix = (year) => {
+        const startObj = new Date(`January 1, ${year} 00:00:00`)
+        const startOfYear = Date.parse(startObj) / 1000
+
+        const endObj = new Date(`December 31, ${year} 23:59:59`)
+        const endOfYear = Date.parse(endObj) / 1000
+
+        return [startOfYear, endOfYear]
+    }
 
     const handleSearch = (modifier, search) => {
         document.getElementById("search-btn").disabled = true
@@ -37,115 +51,78 @@ export const Search = () => {
             return;
         }
 
-        if (checkBoxes[0].checked) {
-            // Starts With String (Not Case Sensitive)
-            fetchGames(`where (name ~ "${name}"*) & (cover.url != null) & (release_dates != null); fields name,genres.name,cover.url,platforms.name,release_dates.y,summary,themes.slug,total_rating; limit 50; offset ${modifier === undefined ? 0 : offset + (modifier === "previous" ? -50 : 50)};`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.length) {
-                        data.forEach(obj => obj.cover.url = obj.cover.url.split("thumb").join("logo_med"))
-                        setGames(data)
-                        document.getElementById("search-btn").disabled = false
+        let startOfYear
+        let endOfYear
 
-                        pageLinks.forEach(link => {
-                            if (link !== null) link.style.pointerEvents = '';
-                        })
-
-                        if (!search) {
-                            if (modifier === "previous") {
-                                const newOffset = offset - 50
-                                setOffset(newOffset)
-                            } else {
-                                const newOffset = offset + 50
-                                setOffset(newOffset)
-                            }
-                        }
-
-                        if (modifier === undefined && search === true) {
-                            setOffset(0)
-                        }
-
-                    } else {
-                        setFeedback("No Matches Found.")
-                        document.getElementById("search-btn").disabled = false
-                        pageLinks.forEach(link => {
-                            if (link !== null) link.style.pointerEvents = '';
-                        })
-                    }
-                })
-        } else if (checkBoxes[1].checked) {
-            // Matches String (Not Case Sensitive)
-            fetchGames(`where (name ~ "${name}") & (cover.url != null) & (release_dates != null); fields name,genres.name,cover.url,platforms.name,release_dates.y,summary,themes.slug,total_rating; limit 50; offset ${modifier === undefined ? 0 : offset + (modifier === "previous" ? -50 : 50)};`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.length) {
-                        data.forEach(obj => obj.cover.url = obj.cover.url.split("thumb").join("logo_med"))
-                        setGames(data)
-                        document.getElementById("search-btn").disabled = false
-
-                        pageLinks.forEach(link => {
-                            if (link !== null) link.style.pointerEvents = '';
-                        })
-
-                        if (!search) {
-                            if (modifier === "previous") {
-                                const newOffset = offset - 50
-                                setOffset(newOffset)
-                            } else {
-                                const newOffset = offset + 50
-                                setOffset(newOffset)
-                            }
-                        }
-
-                        if (modifier === undefined && search === true) {
-                            setOffset(0)
-                        }
-
-                    } else {
-                        setFeedback("No Matches Found.")
-                        document.getElementById("search-btn").disabled = false
-                        pageLinks.forEach(link => {
-                            if (link !== null) link.style.pointerEvents = '';
-                        })
-                    }
-                })
-        } else {
-            // Includes string (Not Case Sensitive)
-            fetchGames(`where (name ~ *"${name}"*) & (cover.url != null) & (release_dates != null); fields name,genres.name,cover.url,platforms.name,release_dates.y,summary,themes.slug,total_rating; limit 50; offset ${modifier === undefined ? 0 : offset + (modifier === "previous" ? -50 : 50)};`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.length) {
-                        data.forEach(obj => obj.cover.url = obj.cover.url.split("thumb").join("logo_med"))
-                        setGames(data)
-                        document.getElementById("search-btn").disabled = false
-
-                        pageLinks.forEach(link => {
-                            if (link !== null) link.style.pointerEvents = '';
-                        })
-
-                        if (!search) {
-                            if (modifier === "previous") {
-                                const newOffset = offset - 50
-                                setOffset(newOffset)
-                            } else {
-                                const newOffset = offset + 50
-                                setOffset(newOffset)
-                            }
-                        }
-
-                        if (modifier === undefined && search === true) {
-                            setOffset(0)
-                        }
-
-                    } else {
-                        setFeedback("No Matches Found.")
-                        document.getElementById("search-btn").disabled = false
-                        pageLinks.forEach(link => {
-                            if (link !== null) link.style.pointerEvents = '';
-                        })
-                    }
-                })
+        if (year) {
+            [startOfYear, endOfYear] = calculateUnix(year)
         }
+
+        fetchGames(`${checkBoxes[0].checked
+            ? `where (name ~ "${name}"*)`
+            : checkBoxes[1].checked
+                ? `where (name ~ "${name}")`
+                : `where (name ~ *"${name}"*)`
+            }
+            & (cover.url != null) 
+            & (first_release_date != null) 
+            ${!platformId
+                ? ``
+                : `& (platforms = (${platformId}))`
+            }
+            ${!year
+                ? ``
+                : `& (first_release_date > ${startOfYear}) & (first_release_date < ${endOfYear})`
+            }; 
+
+            fields name,
+            genres.name,
+            cover.url,
+            platforms.name,
+            first_release_date,
+            summary,
+            themes.slug,
+            total_rating; 
+            
+            limit 50; 
+            
+            offset ${!modifier
+                ? 0
+                : offset + (modifier === "previous" ? -50 : 50)};
+            `)
+            .then(res => res.json())
+            .then(data => {
+                if (data.length) {
+                    data.forEach(obj => obj.cover.url = obj.cover.url.split("thumb").join("logo_med"))
+                    setGames(data)
+                    document.getElementById("search-btn").disabled = false
+
+                    pageLinks.forEach(link => {
+                        if (link !== null) link.style.pointerEvents = '';
+                    })
+
+                    if (!search) {
+                        if (modifier === "previous") {
+                            const newOffset = offset - 50
+                            setOffset(newOffset)
+                        } else {
+                            const newOffset = offset + 50
+                            setOffset(newOffset)
+                        }
+                    }
+
+                    if (modifier === undefined && search === true) {
+                        setOffset(0)
+                    }
+
+                } else {
+                    setFeedback("No Matches Found.")
+                    document.getElementById("search-btn").disabled = false
+                    pageLinks.forEach(link => {
+                        if (link !== null) link.style.pointerEvents = '';
+                    })
+                }
+            })
     }
 
     const paginate = (evt) => {
@@ -183,11 +160,15 @@ export const Search = () => {
         }
     }, [feedback])
 
+
     return (
         <article id="search-container" className="flex flex-col">
             <div className={`fixed ${feedback ? "visible" : "invisible"} ${feedback === "Success!" ? "successFade" : "failureFade"}`}>{feedback}</div>
             <NameSearch handleSearch={handleSearch} setName={setName} setOffset={setOffset} />
-
+            <section className="flex" id="filters">
+                <YearsFilter setYear={setYear} />
+                <PlatformsFilter setPlatformId={setPlatformId} />
+            </section>
             <section className="games-container">
                 {
                     games.length

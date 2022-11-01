@@ -8,7 +8,8 @@ export const Register = () => {
         email: "",
         name: "",
         username: "",
-        phone: ""
+        phone: "",
+        isStaff: false
     }),
         [result, setResult] = useState(""),
         navigate = useNavigate()
@@ -78,7 +79,7 @@ export const Register = () => {
                             .then(res => res.json())
                             .then(createdUser => {
                                 if (createdUser.hasOwnProperty("id")) {
-                                    localStorage.setItem("mgm_user", JSON.stringify({ id: createdUser.id, username: createdUser.username }))
+                                    localStorage.setItem("mgm_user", JSON.stringify({ id: createdUser.id, username: createdUser.username, isStaff: createdUser.isStaff}))
 
                                     setResult("Success!")
 
