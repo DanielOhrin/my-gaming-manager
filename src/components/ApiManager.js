@@ -27,6 +27,10 @@ export const fetchListGames = (params, obj) => {
     return fetch(`${baseURL}/listGames${params ? params : "/"}`, { ...obj })
 }
 
+export const fetchYears = () => {
+    return fetch(`${baseURL}/years`)
+}
+
 // Public API (IGDB) Fetches
 export const fetchGames = (rules) => {
     return fetch(`${proxy}/games`, {
@@ -35,5 +39,14 @@ export const fetchGames = (rules) => {
             "Content-Type": "application/json"
         },
         body: rules
+    })
+}
+export const fetchAPIPlatforms = (fields) => {
+    return fetch(`${proxy}/platforms`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: fields
     })
 }
