@@ -113,6 +113,7 @@ export const Game = ({ gameObj, lists, setUserChoices, userChoices, setFeedback 
                         {gameObj.summary}
                     </div>
                     <div className="flex flex-col w-full items-center h-3/4 justify-start">
+                        <div className="self-start font-bold">Rating: {gameObj.total_rating.toFixed(2)}/100</div>
                         <h2 className="h-fit mt-1 mx-0 mb-1">Lists</h2>
                         <select onChange={(evt) => {
                             const copy = { ...userChoices }

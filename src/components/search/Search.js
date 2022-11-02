@@ -3,21 +3,29 @@ import { Link } from "react-router-dom"
 import { fetchGames, fetchLists } from "../ApiManager"
 import { Game } from "./Game"
 import { NameSearch } from "./NameSearch"
-import { PlatformsFilter } from "./PlatformsFilter"
-import { YearsFilter } from "./YearsFilter"
+import { Filters } from "./Filters/Filters"
+import { Sort } from "./Sort"
 
 export const Search = () => {
     const [games, setGames] = useState([]),
+        [sortedGames, setSortedGames] = useState([]),
         [lists, setLists] = useState([]),
         [feedback, setFeedback] = useState(""),
         [userChoices, setUserChoices] = useState({
             gameId: 0,
-            listId: 0
+            listId: 0,
+        }),
+        [filters, setFilters] = useState({
+            year: 0,
+            platformId: 0,
+            genreId: 0,
+            themeId: 0,
+            ratings: ""
+
         }),
         [offset, setOffset] = useState(0),
         [name, setName] = useState(""),
-        [year, setYear] = useState(0),
-        [platformId, setPlatformId] = useState(0)
+        [sort, setSort] = useState("")
 
     const calculateUnix = (year) => {
         const startObj = new Date(`January 1, ${year} 00:00:00`)
@@ -54,8 +62,8 @@ export const Search = () => {
         let startOfYear
         let endOfYear
 
-        if (year) {
-            [startOfYear, endOfYear] = calculateUnix(year)
+        if (filters.year) {
+            [startOfYear, endOfYear] = calculateUnix(filters.year)
         }
 
         fetchGames(`${checkBoxes[0].checked
@@ -66,14 +74,27 @@ export const Search = () => {
             }
             & (cover.url != null) 
             & (first_release_date != null) 
-            ${!platformId
-                ? ``
-                : `& (platforms = (${platformId}))`
-            }
-            ${!year
+            & (total_rating != null)
+            ${!filters.year
                 ? ``
                 : `& (first_release_date > ${startOfYear}) & (first_release_date < ${endOfYear})`
-            }; 
+            }
+            ${!filters.platformId
+                ? ``
+                : `& (platforms = (${filters.platformId}))`
+            }
+            ${!filters.genreId
+                ? ``
+                : `& (genres = (${filters.genreId}))`
+            }
+            ${!filters.themeId
+                ? ``
+                : `& (themes = (${filters.themeId}))`
+            }
+            ${!filters.ratings
+                ? ``
+                : `& (total_rating > ${parseInt(filters.ratings.split("-")[0])}) & (total_rating < ${parseInt(filters.ratings.split("-")[1])})
+            `}; 
 
             fields name,
             genres.name,
@@ -160,19 +181,39 @@ export const Search = () => {
         }
     }, [feedback])
 
+    useEffect(() => {
+        if (games.length) {
+            const copy = [...games]
 
+            if (sort) {
+                copy.sort((a, b) => {
+                    return sort.split("-")[1] === "asc"
+                        ? sort.split("-")[0] === "name"
+                            ? a[sort.split("-")[0]].charCodeAt(0) - b[sort.split("-")[0]].charCodeAt(0)
+                            : a[sort.split("-")[0]] - b[sort.split("-")[0]]
+                        : sort.split("-")[0] === "name"
+                            ? b[sort.split("-")[0]].charCodeAt(0) - a[sort.split("-")[0]].charCodeAt(0)
+                            : b[sort.split("-")[0]] - a[sort.split("-")[0]]
+                })
+            } else {
+                copy.sort((a, b) => a.id - b.id)
+            }
+            setSortedGames(copy)
+        }
+    }, [sort, games])
     return (
         <article id="search-container" className="flex flex-col">
             <div className={`fixed ${feedback ? "visible" : "invisible"} ${feedback === "Success!" ? "successFade" : "failureFade"}`}>{feedback}</div>
             <NameSearch handleSearch={handleSearch} setName={setName} setOffset={setOffset} />
-            <section className="flex" id="filters">
-                <YearsFilter setYear={setYear} />
-                <PlatformsFilter setPlatformId={setPlatformId} />
+            <section className="flex justify-center flex-wrap" id="filters">
+                <Filters filters={filters} setFilters={setFilters} />
+                <hr className="mb-0 w-full" />
+                <Sort sort={sort} setSort={setSort} />
             </section>
             <section className="games-container">
                 {
-                    games.length
-                        ? games.map(game => {
+                    sortedGames.length
+                        ? sortedGames.map(game => {
                             return <Game key={`game--${game.id}`}
                                 gameObj={game}
                                 lists={lists}
@@ -190,3 +231,4 @@ export const Search = () => {
         </article>
     )
 }
+// Maybe add age/age rating

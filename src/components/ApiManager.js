@@ -41,12 +41,32 @@ export const fetchGames = (rules) => {
         body: rules
     })
 }
-export const fetchAPIPlatforms = (fields) => {
+export const fetchAPIPlatforms = (rules) => {
     return fetch(`${proxy}/platforms`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: fields
+        body: rules
+    })
+}
+
+export const fetchAPIGenres = (rules) => {
+    return fetch(`${proxy}/genres`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: rules
+    })
+}
+
+export const fetchAPIThemes = (rules) => {
+    return fetch(`${proxy}/themes`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: rules
     })
 }
