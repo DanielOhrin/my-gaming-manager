@@ -1,10 +1,10 @@
-import { YearsFilter } from "./YearsFilter"
-import { PlatformsFilter } from "./PlatformsFilter"
 import { useEffect, useState } from "react"
 import { fetchAPIGenres, fetchAPIPlatforms, fetchAPIThemes, fetchYears } from "../../ApiManager"
+import { YearsFilter } from "./YearsFilter"
+import { PlatformsFilter } from "./PlatformsFilter"
 import { RatingsFilter } from "./RatingsFilter"
-import { GenresFilter } from "./GenreFilter"
-import { ThemesFilter } from "./ThemeFilter"
+import { GenresFilter } from "./GenresFilter"
+import { ThemesFilter } from "./ThemesFilter"
 
 export const Filters = ({ filters, setFilters }) => {
     const [apiData, setApiData] = useState({
