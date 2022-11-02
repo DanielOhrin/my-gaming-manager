@@ -10,20 +10,20 @@ export const RatingsFilter = ({ filters, setFilters }) => {
                 } else if (parseInt(evt.target.value) === 1) {
                     copy.ratings = "0-20.9999"
                 } else if ([2, 3, 4, 5, 6, 7].includes(parseInt(evt.target.value))) {
-                    copy.ratings = `${parseInt(evt.target.value)}1-${parseInt(evt.target.value) + 1}0`
+                    copy.ratings = `${parseInt(evt.target.value)}1-${parseInt(evt.target.value) + 1}0.9999`
                 } else {
                     switch (parseInt(evt.target.value)) {
                         case 8:
-                            copy.ratings = "81.0001-89.9999"
+                            copy.ratings = "81-89.9999"
                             break
                         case 9:
-                            copy.ratings = "90.0001-95.9999"
+                            copy.ratings = "90-95.9999"
                             break
                         case 10:
-                            copy.ratings = "96.0001-99.9999"
+                            copy.ratings = "96-98.9999"
                             break
                         case 11:
-                            copy.ratings = "99.00001-100"
+                            copy.ratings = "99-100"
                             break
                         default:
                             window.alert('Something went wrong.')
