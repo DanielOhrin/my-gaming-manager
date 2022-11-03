@@ -231,4 +231,3 @@ export const Search = () => {
         </article>
     )
 }
-// Maybe add age/age rating

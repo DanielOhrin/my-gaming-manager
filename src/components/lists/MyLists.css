@@ -10,7 +10,9 @@
     display: flex;  
     justify-content: space-evenly; 
     width: 83.333333333%;
-    margin-bottom: 1rem;
+    margin: 0rem;
+    padding: 1rem 0 1rem 0;
+    border: 1px solid black;
 }
 
 .list > div {
@@ -24,12 +26,6 @@
     font-weight: bold;
     border: solid 2px black !important;
     border-bottom: 1px solid black !important;
-}
-
-.list-headers, #lists-container > section {
-    margin: 0rem;
-    padding: 1rem 0 1rem 0;
-    border: 1px solid black;
 }
 
 #lists-container > section:nth-child(even) {
