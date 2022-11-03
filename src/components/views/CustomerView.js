@@ -3,6 +3,8 @@ import { List } from "../lists/list/List"
 import { MyLists } from "../lists/MyLists"
 import { Profile } from "../profile/Profile"
 import { Search } from "../search/Search"
+import { Support } from "../support/Support"
+import { Ticket } from "../support/tickets/Ticket"
 
 export const CustomerView = () => {
     return <Routes>
@@ -15,6 +17,9 @@ export const CustomerView = () => {
             <Route path="list/:listId" element={<List />} />
 
             <Route path="search" element={<Search />} />
+
+            <Route path="support" element={<Support />} />
+            <Route path="ticket/:ticketId" element={<Ticket />} />
         </Route>
     </Routes>
 }

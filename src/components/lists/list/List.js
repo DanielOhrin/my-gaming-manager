@@ -32,7 +32,7 @@ export const List = () => {
     useEffect(() => {
         if (!gameIds.length) return;
 
-        fetchGames(`where id = (${gameIds.join(", ")}); fields name,genres.name,cover.url,platforms.name,release_dates.y,summary,themes.slug,total_rating; limit 50;`)
+        fetchGames(`where id = (${gameIds.join(", ")}); fields name,genres.name,cover.url,platforms.name,first_release_date,total_rating,summary,themes.slug,total_rating; limit 50;`)
             .then(res => res.json())
             .then(data => {
                 data.forEach(obj => obj.cover.url = obj.cover.url.split("thumb").join("logo_med"))

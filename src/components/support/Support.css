@@ -1,0 +1,39 @@
+.support-container {
+    height: 95.25%;
+}
+
+#tickets > div {
+    width: 90%;
+}
+
+#tickets > div:nth-child(even) {
+    background-color: lightgray;
+}
+
+#tickets > div:nth-child(odd) {
+    background-color: rgb(182, 182, 182);
+}
+
+#tickets {
+    padding-right: 0.25rem;
+    padding-bottom: 5rem;
+}
+
+.contact-btn {
+    padding: 2.5rem;
+    border-radius: 360rem;
+    width: 50%;
+    font-size: 2rem;
+    box-shadow: 1px 1px inset;
+    background-color: rgb(199, 199, 199);
+    text-shadow: 1px 1px;
+}
+
+.contact-btn:hover {
+    background-color: rgb(228, 228, 228);
+    cursor: pointer;
+}
+
+.contact-btn:active {
+    background-color: rgb(241, 241, 241);
+} 

@@ -58,7 +58,7 @@ export const ListGame = ({ gameObj, editing, listId, setGameIds }) => {
                                 <img className="modal-img" src={gameObj.cover?.url?.split("logo_med").join("cover_big")} alt={gameObj.name}></img>
                             </div>
                             <div className="w-full flex flex-col justify-between">
-                                <h2 className="w-full text-center h-fit my-0">{gameObj.name} ({gameObj.release_dates[0].y})</h2>
+                                <h2 className="w-full text-center h-fit my-0">{gameObj.name} ({gameObj.first_release_date})</h2>
                                 <div className="flex flex-col items-center mr-5">
                                     {
                                         gameObj.genres?.length
@@ -93,7 +93,10 @@ export const ListGame = ({ gameObj, editing, listId, setGameIds }) => {
                             <div className="description">
                                 {gameObj.summary}
                             </div>
-                            <button id={`remove--${gameObj.id}`} className="remove-btn" onClick={removeFromList}>Remove from List</button>
+                            <div className="flex flex-col w-full items-center h-3/4 justify-start">
+                                <div className="self-start font-bold">Rating: {gameObj.total_rating.toFixed(2)}/100</div>
+                                <button id={`remove--${gameObj.id}`} className="remove-btn" onClick={removeFromList}>Remove from List</button>
+                            </div>
                         </section>
                     </div>
                 </section>

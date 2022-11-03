@@ -31,6 +31,17 @@ export const fetchYears = () => {
     return fetch(`${baseURL}/years`)
 }
 
+export const fetchTickets = (params, obj) => {
+    return fetch(`${baseURL}/tickets${params ? params : "/"}`, { ...obj })
+}
+
+export const fetchTicketCategories = () => {
+    return fetch(`${baseURL}/ticketCategories`)
+}
+
+export const fetchTicketMessages = (params, obj) => {
+    return fetch(`${baseURL}/ticketMessages${params ? params : "/"}`, { ...obj })
+}
 // Public API (IGDB) Fetches
 export const fetchGames = (rules) => {
     return fetch(`${proxy}/games`, {
