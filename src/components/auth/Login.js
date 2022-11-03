@@ -5,18 +5,14 @@ import "./Login.css"
 
 export const Login = () => {
     const [email, setEmail] = useState(""),
-    [result, setResult] = useState(""),
-    navigate = useNavigate()
+        [result, setResult] = useState(""),
+        navigate = useNavigate()
 
     useEffect(() => {
         if (result !== "") {
-            setTimeout(() => {setResult("")}, 2000)
+            setTimeout(() => { setResult("") }, 2000)
         }
     }, [result])
-
-    const handleUserInput = (evt) => {
-        setEmail(evt.target.value)
-    }
 
     const handleLogin = (evt) => {
         evt.preventDefault()
@@ -30,16 +26,16 @@ export const Login = () => {
                 .then(userObj => {
                     if (userObj[0] && userObj[0].hasOwnProperty("id")) {
                         setResult("Success!")
-                        localStorage.setItem("mgm_user", JSON.stringify({id: userObj[0].id, username: userObj[0].username, isStaff: userObj[0].isStaff}))
-                        setTimeout(() => {navigate(`/my-lists/${userObj[0].id}`)}, 2000)
+                        localStorage.setItem("mgm_user", JSON.stringify({ id: userObj[0].id, username: userObj[0].username, isStaff: userObj[0].isStaff }))
+                        setTimeout(() => { navigate(`/`) }, 2000)
                     } else {
                         setResult("Email not registered!")
-                        setTimeout(() => {document.getElementById("login-btn").disabled = false}, 2000)
+                        setTimeout(() => { document.getElementById("login-btn").disabled = false }, 2000)
                     }
                 })
         } else {
             setResult("Invalid Email!")
-            setTimeout(() => {document.getElementById("login-btn").disabled = false}, 2000)
+            setTimeout(() => { document.getElementById("login-btn").disabled = false }, 2000)
         }
     }
 
@@ -51,7 +47,7 @@ export const Login = () => {
                 <form>
                     <fieldset className="border-none flex flex-col">
                         <label htmlFor="email">Email</label>
-                        <input onChange={handleUserInput} name="email" type="text" value={email} />
+                        <input onChange={(evt) => setEmail(evt.target.value)} name="email" type="text" value={email} />
                     </fieldset>
                     <div>
                         <button className="ml-4 pl-5 pr-5" id="login-btn" onClick={handleLogin}>Login</button>

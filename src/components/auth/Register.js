@@ -9,7 +9,6 @@ export const Register = () => {
         name: "",
         username: "",
         phone: "",
-        isStaff: false
     }),
         [result, setResult] = useState(""),
         navigate = useNavigate()
@@ -73,17 +72,18 @@ export const Register = () => {
                             },
                             body: JSON.stringify({
                                 ...userInfo,
-                                dateCreated: Date.now()
+                                dateCreated: Date.now(),
+                                isStaff: false
                             })
                         })
                             .then(res => res.json())
                             .then(createdUser => {
                                 if (createdUser.hasOwnProperty("id")) {
-                                    localStorage.setItem("mgm_user", JSON.stringify({ id: createdUser.id, username: createdUser.username, isStaff: createdUser.isStaff}))
+                                    localStorage.setItem("mgm_user", JSON.stringify({ id: createdUser.id, username: createdUser.username, isStaff: createdUser.isStaff }))
 
                                     setResult("Success!")
 
-                                    setTimeout(() => { navigate(`/my-lists/${createdUser.id}`) }, 2000)
+                                    setTimeout(() => { navigate(`/`) }, 2000)
                                 } else {
                                     setResult("Error creating account!")
                                     setTimeout(() => { document.getElementById("register-btn").disabled = false }, 2000)
