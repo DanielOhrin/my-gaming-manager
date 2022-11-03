@@ -13,17 +13,25 @@ I enjoy playing video games so I knew I wanted to build something based around t
 
 # How it works
 
-When the user first opens the application, they are redirected to the [login page](https://prnt.sc/a-5fI6UpD1Hi) where they can either login or [register](https://prnt.sc/um0zDvrp7_L5) a new account. Then they are redirected to a view with their lists.
+When the user first opens the application, they are redirected to the [login page](https://prnt.sc/a-5fI6UpD1Hi) where they can either login or [register](https://prnt.sc/um0zDvrp7_L5) a new account. Then they are redirected to a view some general information about the website and its purpose.
 
-The user can create a list here, then navigate over to the [Search](https://prnt.sc/LePb0A8xCbg9) page _from the navbar_ to search for games to add.
+The user can create a list at [My Lists](https://prnt.sc/opFtVQ8i5vD8), then navigate over to the [Search](https://prnt.sc/qF9hDuu4LwPy) page _from the navbar_ to search for games to add.
 
-The user's lists are display on the page called [My Lists](https://prnt.sc/opFtVQ8i5vD8), and when the name of a list is clicked on, the user is directed to a view with [the list](https://prnt.sc/x5yzBBrMBz6e) information and all games added to it.
+The user's lists are display on the My Lists page, and when the name of a list is clicked on, the user is directed to a view with [the list](https://prnt.sc/x5yzBBrMBz6e) information and all games added to it.
 
 This is the main purpose of the application -- to organize games from all platforms.
 
+## Additional Features
+I had some extra time because I finished my project early, so I added a ticket system for users to [Contact Support](https://prnt.sc/gaAx1QX-dbzL).
+When they click the Contact Support button (below FAQs) a form to make a new ticket pops up.
+
+When the user clicks on the name of a ticket, the ticket info and conversation is [displayed](https://prnt.sc/hY6Wtcqzn3Ad)
+When the user is satisfied with the course of their ticked, they can close it. (confirmation popup included)
+
+If user is MGM Support, they can view and respond to normal users' tickets [with this view](https://prnt.sc/QkrgdAiVHw_9)
 # How it was developed
 
-To reach MVP, I spent four days coding all of the functionality for the components and styling them enough to be useable.
+To reach MVP, I coded all of the functionality for the components and styled them enough to be useable.
 
 I used [React](https://reactjs.org/) and [React-Router](https://v5.reactrouter.com/web/guides/quick-start) to manage state and routes in my application.
 
