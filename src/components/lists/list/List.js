@@ -9,9 +9,10 @@ export const List = () => {
         [listTags, setListTags] = useState([]),
         [gameIds, setGameIds] = useState([]),
         [games, setGames] = useState([]),
-        [editing, setEditing] = useState(false),
-        { listId } = useParams(),
-        navigate = useNavigate()
+        [editing, setEditing] = useState(false)
+
+    const { listId } = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetchLists(`/${listId}`)

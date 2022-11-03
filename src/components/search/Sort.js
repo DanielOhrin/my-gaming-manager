@@ -1,4 +1,4 @@
-export const Sort = ({ sort, setSort }) => {
+export const Sort = ({ setSort }) => {
     const handleSortChange = (evt) => {
         const selects = [document.getElementsByName("rating")[0], document.getElementsByName("year")[0], document.getElementsByName("name")[0]]
 

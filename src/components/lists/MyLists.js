@@ -16,7 +16,7 @@ export const MyLists = () => {
             .then(res => res.json())
             .then(data => setLists(data))
 
-        fetchTags() 
+        fetchTags()
             .then(res => res.json())
             .then(data => setTags(data))
 

@@ -27,6 +27,41 @@ export const Search = () => {
         [name, setName] = useState(""),
         [sort, setSort] = useState("")
 
+    useEffect(() => {
+        fetchLists(`?userId=${JSON.parse(localStorage.getItem("mgm_user")).id}&_sort=name&_order=asc`)
+            .then(res => res.json())
+            .then(data => setLists(data))
+    }, [])
+
+    useEffect(() => {
+        if (feedback !== "") {
+            setTimeout(() => {
+                setFeedback("")
+            }, 3000)
+        }
+    }, [feedback])
+
+    useEffect(() => {
+        if (games.length) {
+            const copy = [...games]
+
+            if (sort) {
+                copy.sort((a, b) => {
+                    return sort.split("-")[1] === "asc"
+                        ? sort.split("-")[0] === "name"
+                            ? a[sort.split("-")[0]].charCodeAt(0) - b[sort.split("-")[0]].charCodeAt(0)
+                            : a[sort.split("-")[0]] - b[sort.split("-")[0]]
+                        : sort.split("-")[0] === "name"
+                            ? b[sort.split("-")[0]].charCodeAt(0) - a[sort.split("-")[0]].charCodeAt(0)
+                            : b[sort.split("-")[0]] - a[sort.split("-")[0]]
+                })
+            } else {
+                copy.sort((a, b) => a.id - b.id)
+            }
+            setSortedGames(copy)
+        }
+    }, [sort, games])
+
     const calculateUnix = (year) => {
         const startObj = new Date(`January 1, ${year} 00:00:00`)
         const startOfYear = Date.parse(startObj) / 1000
@@ -36,6 +71,7 @@ export const Search = () => {
 
         return [startOfYear, endOfYear]
     }
+
 
     const handleSearch = (modifier, search) => {
         document.getElementById("search-btn").disabled = true
@@ -167,40 +203,7 @@ export const Search = () => {
         }
     }
 
-    useEffect(() => {
-        fetchLists(`?userId=${JSON.parse(localStorage.getItem("mgm_user")).id}&_sort=name&_order=asc`)
-            .then(res => res.json())
-            .then(data => setLists(data))
-    }, [])
 
-    useEffect(() => {
-        if (feedback !== "") {
-            setTimeout(() => {
-                setFeedback("")
-            }, 3000)
-        }
-    }, [feedback])
-
-    useEffect(() => {
-        if (games.length) {
-            const copy = [...games]
-
-            if (sort) {
-                copy.sort((a, b) => {
-                    return sort.split("-")[1] === "asc"
-                        ? sort.split("-")[0] === "name"
-                            ? a[sort.split("-")[0]].charCodeAt(0) - b[sort.split("-")[0]].charCodeAt(0)
-                            : a[sort.split("-")[0]] - b[sort.split("-")[0]]
-                        : sort.split("-")[0] === "name"
-                            ? b[sort.split("-")[0]].charCodeAt(0) - a[sort.split("-")[0]].charCodeAt(0)
-                            : b[sort.split("-")[0]] - a[sort.split("-")[0]]
-                })
-            } else {
-                copy.sort((a, b) => a.id - b.id)
-            }
-            setSortedGames(copy)
-        }
-    }, [sort, games])
     return (
         <article id="search-container" className="flex flex-col">
             <div className={`fixed ${feedback ? "visible" : "invisible"} ${feedback === "Success!" ? "successFade" : "failureFade"}`}>{feedback}</div>
@@ -208,7 +211,7 @@ export const Search = () => {
             <section className="flex justify-center flex-wrap" id="filters">
                 <Filters filters={filters} setFilters={setFilters} />
                 <hr className="mb-0 w-full" />
-                <Sort sort={sort} setSort={setSort} />
+                <Sort setSort={setSort} />
             </section>
             <section className="games-container">
                 {

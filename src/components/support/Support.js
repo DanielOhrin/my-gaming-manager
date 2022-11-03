@@ -1,7 +1,11 @@
-import "./Support.css"
+import { useState } from "react"
+import { TicketForm } from "./tickets/TicketForm"
 import { TicketList } from "./tickets/TicketList"
+import "./Support.css"
 
 export const Support = () => {
+    const [newTicket, setNewTicket] = useState(false)
+
     return (
         <article className="flex support-container">
             <section id="faq" className="flex flex-col items-center bg-black w-2/5 text-white">
@@ -34,19 +38,27 @@ export const Support = () => {
                 </div>
                 <div className="flex flex-col w-full items-center">
                     <h2 className="mb-0">Still Need Help?</h2>
-                    <button className="contact-btn">Contact Support</button>
+                    <button className="contact-btn" onClick={() => setNewTicket(true)}>Contact Support</button>
                 </div>
             </section>
             <section id="tickets" className="flex flex-col items-center w-3/5 bg-gray-200">
                 <h2>Tickets</h2>
                 <div className="w-full">
-                    <header className="flex justify-evenly list w-auto list-headers">
-                        <div>Title</div>
-                        <div>Category</div>
-                        <div>Last Message</div>
-                        <div>Date Created</div>
-                    </header>
-                    <TicketList />
+                    {
+                        !newTicket
+                            ? (
+                                <>
+                                    <header className="flex justify-evenly list w-auto list-headers">
+                                        <div>Title</div>
+                                        <div>Category</div>
+                                        <div>Last Message</div>
+                                        <div>Date Created</div>
+                                    </header>
+                                    <TicketList />
+                                </>
+                            )
+                            : <TicketForm setNewTicket={setNewTicket} />
+                    }
                 </div>
             </section>
         </article>

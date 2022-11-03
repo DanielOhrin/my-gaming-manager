@@ -14,12 +14,6 @@ export const Ticket = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        // Prevents random users from seeing ticket data that doesn't belong to them
-        if (userId !== ticket.userId && !JSON.parse(localStorage.getItem("mgm_user")).isStaff) {
-            navigate("/support", { replace: true })
-            return;
-        }
-
         const differenceInDays = (dateOne, dateTwo) => {
             const differenceInTime = dateTwo.getTime() - dateOne.getTime()
 
@@ -38,8 +32,17 @@ export const Ticket = () => {
             .then(data => setTicketMessages(data))
 
         setUserId(JSON.parse(localStorage.getItem("mgm_user")).id)
-        // eslint-disable-next-line
     }, [ticketId, userId])
+
+    useEffect(() => {
+        if (ticket.userId) {
+            // I do realize they can still see the ticket data through the network tab
+            if (userId !== ticket.userId && !JSON.parse(localStorage.getItem("mgm_user")).isStaff) {
+                navigate("/support", { replace: true })
+                return;
+            }
+        }
+    }, [ticket, userId, navigate])
 
     const renderMessages = () => {
         for (let i = 0; i <= daysSinceCreation; i++) {

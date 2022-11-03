@@ -18,7 +18,7 @@ export const Lists = ({ tags, lists }) => {
                                 : "None"
                         }</div>
                         <div className="flex flex-col">
-                            {list.platform?.label} 
+                            {list.platform?.label}
                         </div>
                     </section>
                 })
