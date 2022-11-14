@@ -13,7 +13,6 @@ export const Profile = () => {
         fetchUsers(`/${userId}`)
             .then(res => res.json())
             .then(data => {
-                data.dateCreated = new Date(data.dateCreated).toLocaleDateString()
                 setUserObj(data)
                 setBackupUserObj(data)
             })
@@ -84,7 +83,6 @@ export const Profile = () => {
                         fetchUsers(`/${userId}`)
                             .then(res => res.json())
                             .then(data => {
-                                data.dateCreated = new Date(data.dateCreated).toLocaleDateString()
                                 setUserObj(data)
                                 setBackupUserObj(data)
                                 setEditing(false)

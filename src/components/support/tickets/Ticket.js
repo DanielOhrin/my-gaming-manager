@@ -14,17 +14,11 @@ export const Ticket = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const differenceInDays = (dateOne, dateTwo) => {
-            const differenceInTime = dateTwo.getTime() - dateOne.getTime()
-
-            return differenceInTime / (1000 * 3600 * 24)
-        }
-
         fetchTickets(`/${ticketId}`)
             .then(res => res.json())
             .then(data => {
                 setTicket(data)
-                setDaysSinceCreation(Math.floor(differenceInDays(new Date(data.dateOpened * 1000), (new Date()))))
+                setDaysSinceCreation(differenceInDays(data.dateOpened, (Date.now() / 1000)))
             })
 
         fetchTicketMessages(`?ticketId=${ticketId}&_expand=user`)
@@ -44,16 +38,41 @@ export const Ticket = () => {
         }
     }, [ticket, userId, navigate])
 
+    const differenceInDays = (dateOne, dateTwo) => {
+
+        dateOne = new Date(dateOne * 1000).toDateString().split(" ")
+        dateTwo = new Date(dateTwo * 1000).toDateString().split(" ")
+
+        dateOne[1] = `${dateOne[1]},`
+        dateTwo[1] = `${dateTwo[1]},`
+
+        dateOne = new Date(`${dateOne.join(" ")} 00:00:00`)
+        dateTwo = new Date(`${dateTwo.join(" ")} 00:00:00`)
+
+        return Math.ceil((Date.parse(dateTwo) / 1000 - Date.parse(dateOne) / 1000) / 86400)
+    }
+
     const renderMessages = () => {
-        for (let i = 0; i <= daysSinceCreation; i++) {
-            const bottomLimit = ticket.dateOpened + (86400 * (i - 1))
-            const topLimit = ticket.dateOpened + (86400 * (i + 1))
+        const messages = []
 
-            const currentMessages = ticketMessages.filter(tM => tM.datetime > bottomLimit && tM.datetime < topLimit)
 
-            return (
+        for (let i = 1; i <= daysSinceCreation; i++) {
+            let bottomLimit = new Date((ticket.dateOpened + (86400 * (i - 1))) * 1000).toDateString().split(" ")
+            let topLimit = new Date((ticket.dateOpened + (86400 * (i - 1))) * 1000).toDateString().split(" ")
+
+            bottomLimit[1] = `${bottomLimit[1]},`
+            topLimit[1] = `${topLimit[1]},`
+
+            bottomLimit = Date.parse(new Date(`${bottomLimit.join(" ")} 00:00:00`)) / 1000
+            topLimit = Date.parse(new Date(`${topLimit.join(" ")} 23:59:59`)) / 1000
+
+            const currentMessages = ticketMessages.filter(tM => tM.datetime >= bottomLimit && tM.datetime <= topLimit)
+
+            if (!currentMessages.length) continue
+
+            messages.push(
                 <>
-                    <h3><em>{new Date((bottomLimit + 86400) * 1000).toLocaleDateString()}</em></h3>
+                    <h3><em>{new Date((bottomLimit * 1000)).toLocaleDateString()}</em></h3>
                     {
                         currentMessages.map(cM => {
                             return (
@@ -67,6 +86,8 @@ export const Ticket = () => {
                 </>
             )
         }
+
+        return messages
     }
 
     const closeTicket = () => {
