@@ -72,7 +72,7 @@ export const Register = () => {
                             },
                             body: JSON.stringify({
                                 ...userInfo,
-                                dateCreated: Date.now(),
+                                dateCreated: new Date().toLocaleDateString(),
                                 isStaff: false
                             })
                         })
