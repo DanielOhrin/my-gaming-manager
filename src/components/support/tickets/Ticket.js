@@ -56,9 +56,9 @@ export const Ticket = () => {
         const messages = []
 
 
-        for (let i = 1; i <= daysSinceCreation; i++) {
-            let bottomLimit = new Date((ticket.dateOpened + (86400 * (i - 1))) * 1000).toDateString().split(" ")
-            let topLimit = new Date((ticket.dateOpened + (86400 * (i - 1))) * 1000).toDateString().split(" ")
+        for (let i = 0; i <= daysSinceCreation; i++) {
+            let bottomLimit = new Date((ticket.dateOpened + (86400 * (i))) * 1000).toDateString().split(" ")
+            let topLimit = new Date((ticket.dateOpened + (86400 * (i))) * 1000).toDateString().split(" ")
 
             bottomLimit[1] = `${bottomLimit[1]},`
             topLimit[1] = `${topLimit[1]},`
