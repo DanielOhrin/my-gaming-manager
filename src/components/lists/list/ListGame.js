@@ -58,7 +58,7 @@ export const ListGame = ({ gameObj, editing, listId, setGameIds }) => {
                                 <img className="modal-img" src={gameObj.cover?.url?.split("logo_med").join("cover_big")} alt={gameObj.name}></img>
                             </div>
                             <div className="w-full flex flex-col justify-between">
-                                <h2 className="w-full text-center h-fit my-0">{gameObj.name} ({gameObj.first_release_date})</h2>
+                                <h2 className="w-full text-center h-fit my-0">{gameObj.name} ({new Date(gameObj.first_release_date * 1000).getFullYear()})</h2>
                                 <div className="flex flex-col items-center mr-5">
                                     {
                                         gameObj.genres?.length

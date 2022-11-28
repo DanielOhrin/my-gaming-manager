@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { fetchTicketMessages, fetchTickets } from "../../ApiManager"
 import "./Ticket.css"
@@ -71,7 +71,7 @@ export const Ticket = () => {
             if (!currentMessages.length) continue
 
             messages.push(
-                <>
+                <React.Fragment key={`message--${message.id}`}>
                     <h3><em>{new Date((bottomLimit * 1000)).toLocaleDateString()}</em></h3>
                     {
                         currentMessages.map(cM => {
@@ -83,7 +83,7 @@ export const Ticket = () => {
                             )
                         })
                     }
-                </>
+                </React.Fragment>
             )
         }
 
